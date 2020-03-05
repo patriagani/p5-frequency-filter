@@ -8,7 +8,7 @@ function setup() {
 
   filter = new p5.BandPass();
 
-  noise = new p5.Noise();
+  noise = new p5.AudioIn();
 
   noise.disconnect(); // Disconnect soundfile from master output...
   filter.process(noise); // ...and connect to filter so we'll only hear BandPass.
@@ -25,7 +25,7 @@ function draw() {
   // Map mouseY to resonance/width
   filterWidth = map(mouseY, 0, height, 0, 90);
   // set filter parameters
-  filter.set(filterFreq, 100);
+  filter.set(100, 100);
 
   // Draw every value in the FFT spectrum analysis where
   // x = lowest (10Hz) to highest (22050Hz) frequencies,
@@ -37,4 +37,5 @@ function draw() {
     let h = -height + map(spectrum[i], 0, 255, height, 0);
     rect(x, height, width / spectrum.length, h);
   }
+  console.log(Math.max(...spectrum))
 }
